@@ -1,0 +1,9 @@
+# Proposes updates to the GitHub Actions used by the workflows. Like any
+# pull request, these are only proposals until the maintainer merges them.
+version: 2
+updates:
+  - package-ecosystem: github-actions
+    directory: /
+    schedule:
+      interval: monthly
+    open-pull-requests-limit: 3

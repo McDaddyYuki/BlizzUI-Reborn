@@ -1,0 +1,20 @@
+dofile(TESTS_DIR .. "lib.lua")
+H.login()
+check(A.char.active.name == "My Layout", "old active layout kept")
+local e = A.draft.frames.player
+check(e.point and e.x and e.y, "old fractional position converted to an anchor")
+local l, b, w, h = T.rect("player")
+local W, Hh = UIParent:GetWidth(), UIParent:GetHeight()
+check(near(l + w / 2, .34 * W, 1) and near(b + h / 2, .32 * Hh, 1), "converted position matches the old one")
+check(A.draft.frames.debuffs == nil, "unknown old element dropped")
+check(A.draft.frames.action1.scale == 90 and A.draft.frames.action1.point, "old bar settings kept")
+check(A.draft.compartment == false, "old compartment setting kept")
+check(BlizzUIRebornDB.version == 2 and BlizzUIRebornDB.editor.spacing == 80, "db upgraded, editor prefs kept")
+H.tick(0.5, 7)
+local found
+for _, m in ipairs(MOCK.messages) do if m:find("layout%-local") then found = true end end
+check(found, "one-time notice about the old layout cache")
+check(not A.dirty, "migration does not mark the layout dirty")
+T.open()
+T.chooseLayout("Shared")
+check(A.char.active.name == "Shared" and A.draft.frames.target.point, "shared old layout converts too")

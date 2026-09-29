@@ -1,0 +1,93 @@
+name: Bug report
+description: Something doesn't work, errors, or looks wrong.
+title: "[Bug]: "
+labels: ["bug", "needs-triage"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Thanks for reporting. Please **don't** include account names, passwords, e-mail addresses or whole WTF folders.
+  - type: input
+    id: version
+    attributes:
+      label: BlizzUI Reborn version
+      description: Shown by `/br report` (first line), or in the addon's .toc file.
+      placeholder: "0.7.0"
+    validations:
+      required: true
+  - type: input
+    id: client
+    attributes:
+      label: Game client
+      description: Version and build (the login screen shows it at the bottom left).
+      placeholder: "3.3.5a (12340)"
+    validations:
+      required: true
+  - type: input
+    id: server
+    attributes:
+      label: Server / realm
+      placeholder: "Warmane Frostmourne"
+    validations:
+      required: true
+  - type: dropdown
+    id: area
+    attributes:
+      label: Area
+      multiple: true
+      options:
+        - Edit Mode / layouts
+        - Action bars / stance / totem bar
+        - Unit frames / stance badge
+        - Minimap / Carbonite / Addon Compartment
+        - Boss Timeline / Boss Warnings
+        - Quick Keybind
+        - Other
+    validations:
+      required: true
+  - type: textarea
+    id: what
+    attributes:
+      label: What happened, and what did you expect?
+    validations:
+      required: true
+  - type: textarea
+    id: steps
+    attributes:
+      label: Steps to reproduce
+      placeholder: |
+        1. Open Edit Mode (/br)
+        2. ...
+    validations:
+      required: true
+  - type: textarea
+    id: error
+    attributes:
+      label: Lua error text
+      description: Turn errors on with `/console scriptErrors 1`, then copy the whole message.
+      render: text
+  - type: textarea
+    id: report
+    attributes:
+      label: /br report output
+      description: Type `/br report` and copy the text from the window.
+      render: text
+  - type: textarea
+    id: addons
+    attributes:
+      label: Other addons
+      description: Especially Deadly Boss Mods / BigWigs (and their versions), Carbonite, Bagnon, Questie.
+  - type: textarea
+    id: screenshots
+    attributes:
+      label: Screenshots
+      description: Drag images here if they help (crop out chat and names if you like).
+  - type: checkboxes
+    id: checks
+    attributes:
+      label: Checks
+      options:
+        - label: I searched the existing issues.
+          required: true
+        - label: I'm using an official release ZIP from this repository's Releases page.
+        - label: The problem still happens with only BlizzUI Reborn enabled (or I've listed the addons needed to trigger it).

@@ -1,0 +1,18 @@
+-- Reload persistence, phase 1 (phase 2 is t07_reload_b.lua)
+dofile(TESTS_DIR .. "lib.lua")
+H.login()
+T.open()
+A.db.editor.snap = false
+H.click(A.editor.layout); H.click(T.menuRow("New Layout"))
+T.typeDialog("Name", "Persist", true)
+T.dragElement("target", -50, 30)
+A:SetSetting("action1", "rows", 2)
+A:SetSetting("micro", "scale", 110)
+H.click(A.editor.save)
+local l, b = T.rect("target")
+PERSIST = { l = l, b = b }
+A:RequestExit()
+local f = io.open(TMP_DIR .. "expect.lua", "w")
+f:write(string.format("EXPECT = { l = %.6f, b = %.6f }\n", l, b)); f:close()
+H.logout(TMP_DIR .. "sv.lua")
+check(not TargetFrame:IsUserPlaced(), "managed frames are not left user-placed at logout")

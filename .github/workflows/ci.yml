@@ -1,0 +1,71 @@
+# Checks every pull request (including from forks) and every push to main.
+# Runs with a read-only token and no secrets; fork pull requests from outside
+# contributors wait for the maintainer's approval before running.
+name: CI
+
+on:
+  pull_request:
+  push:
+    branches: [main]
+
+permissions:
+  contents: read
+
+concurrency:
+  group: ci-${{ github.event.pull_request.number || github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  compat:
+    name: Lua 5.1 compatibility
+    runs-on: ubuntu-24.04
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+      - name: Install Lua 5.1
+        run: sudo apt-get update -q && sudo apt-get install -y -q lua5.1
+      - name: Compile every addon file with the Lua 5.1 compiler
+        run: |
+          for f in BlizzUIReborn/*.lua; do luac5.1 -p "$f" || exit 1; done
+          echo "All addon files parse as Lua 5.1."
+      - name: Lint for 5.2+ syntax and Retail-only APIs
+        run: python3 tools/lint51.py BlizzUIReborn
+
+  tests:
+    name: Regression tests (Lua 5.1)
+    runs-on: ubuntu-24.04
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+      - name: Install Lua 5.1
+        run: sudo apt-get update -q && sudo apt-get install -y -q lua5.1
+      - name: Run all scenario tests against the simulated 3.3.5 client
+        run: LUA=lua5.1 tools/run_all.sh
+
+  package:
+    name: Package check
+    runs-on: ubuntu-24.04
+    timeout-minutes: 5
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+      - name: Build the release ZIP for the version in the .toc
+        id: build
+        run: |
+          version=$(sed -n 's/^## Version: *//p' BlizzUIReborn/BlizzUIReborn.toc | tr -d '\r')
+          echo "version=$version" >> "$GITHUB_OUTPUT"
+          python3 scripts/package.py "$version"
+      - name: Check the ZIP contents
+        run: python3 scripts/check_package.py "dist/BlizzUIReborn-${{ steps.build.outputs.version }}.zip" "${{ steps.build.outputs.version }}"
+      - name: Check the changelog has this version
+        run: python3 scripts/release_notes.py "${{ steps.build.outputs.version }}" > /dev/null
+      - uses: actions/upload-artifact@v4
+        with:
+          name: BlizzUIReborn-${{ steps.build.outputs.version }}-preview
+          path: dist/*.zip
+          retention-days: 7

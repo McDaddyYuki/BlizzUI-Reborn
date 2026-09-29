@@ -1,0 +1,39 @@
+name: Feature request
+description: Suggest an improvement or a Retail feature to bring over.
+title: "[Feature]: "
+labels: ["enhancement", "needs-triage"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        BlizzUI Reborn brings Retail's HUD Edit Mode and Boss Timeline *functionality* to 3.3.5a, and keeps the game's own look (stock frames, colours and art).
+  - type: textarea
+    id: problem
+    attributes:
+      label: What problem would this solve?
+    validations:
+      required: true
+  - type: textarea
+    id: proposal
+    attributes:
+      label: What should happen?
+      description: Describe the behaviour. Mock-ups or Retail screenshots are welcome.
+    validations:
+      required: true
+  - type: input
+    id: retail
+    attributes:
+      label: Retail equivalent (if any)
+      placeholder: "e.g. Edit Mode > Action Bar > Icon Padding"
+  - type: textarea
+    id: alternatives
+    attributes:
+      label: Alternatives you've considered
+  - type: checkboxes
+    id: scope
+    attributes:
+      label: Scope
+      options:
+        - label: This keeps the stock 3.3.5 look (no new textures or borders).
+        - label: I understand features are added at the maintainer's discretion.
+          required: true

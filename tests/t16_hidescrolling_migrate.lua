@@ -1,0 +1,6 @@
+dofile(TESTS_DIR .. "lib.lua")
+H.login()
+check(A.draft.frames.paging and A.draft.frames.paging.enabled == false, "old 'Hide Bar Scrolling' becomes hidden page arrows")
+check(A.draft.frames.action1.hideScrolling == nil, "old option removed from bar 1")
+check(ActionBarUpButton:GetAlpha() == 0, "arrows hidden after upgrade")
+check(not A.dirty, "upgrade does not mark the layout dirty")

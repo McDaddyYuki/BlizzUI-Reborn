@@ -1,0 +1,38 @@
+-- Combat safety: nothing protected is touched during lockdown
+dofile(TESTS_DIR .. "lib.lua")
+H.login()
+T.open()
+T.dragElement("player", 20, 20)
+A:SelectElement("player")
+H.enterCombat()
+check(not A.editing and not A.editor:IsShown(), "entering combat closes Edit Mode")
+check(A.dirty, "unsaved changes kept through combat")
+check(not H.pressKey("UP"), "nudge bindings cleared before lockdown")
+SlashCmdList.BLIZZUIREBORN("")
+check(not A.editing, "cannot open Edit Mode in combat")
+-- Blizzard code runs in combat: our hooks must not touch protected frames
+UIParent_ManageFramePositions()
+ShowBonusActionBar(); HideBonusActionBar()
+MultiActionBar_Update()
+ReputationWatchBar_Update()
+MoveMicroButtons("BOTTOMLEFT", VehicleMenuBar, "BOTTOMLEFT", 10, 10)
+H.tick(0.1, 20)
+-- a layout switch requested in combat is refused
+local ok, err = A:LoadPreset("Classic")
+check(not ok and err, "layout switch refused in combat")
+-- drift of a protected frame in combat waits for combat end
+PlayerFrame.__points = {}
+table.insert(PlayerFrame.__points, { "TOPLEFT", UIParent, "TOPLEFT", -19, -4 })
+H.tick(0.1, 10)
+check(#MOCK.blocked == 0, "no blocked actions in combat")
+MoveMicroButtons("BOTTOMLEFT", MainMenuBarArtFrame, "BOTTOMLEFT", 552, 2)
+H.tick(0.3, 3)
+local mp, mrel = CharacterMicroButton:GetPoint(1)
+check(mrel == A.elements.micro.frame, "micro menu (not protected) re-applied even in combat")
+H.leaveCombat()
+H.tick(0.3, 3)
+local p, rel = PlayerFrame:GetPoint(1)
+local e = A.draft.frames.player
+check(p == e.point and rel == UIParent, "protected frame drift fixed after combat")
+T.open()
+check(A.editing and A.dirty, "reopening after combat shows the kept changes")
