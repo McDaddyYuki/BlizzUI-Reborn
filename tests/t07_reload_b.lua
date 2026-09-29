@@ -1,0 +1,15 @@
+-- Reload persistence, phase 2: run with the saved-variables file from phase 1
+dofile(TESTS_DIR .. "lib.lua")
+dofile(TMP_DIR .. "expect.lua")
+local p, rel, rp, x, y = TargetFrame:GetPoint(1)
+check(near(x, 250) and near(y, -4), "client layout cache held the native target position (not our moved one)")
+H.login()
+check(A.char.active.name == "Persist" and A.char.active.scope == "character", "active layout restored after reload")
+local l, b = T.rect("target")
+check(near(l, EXPECT.l) and near(b, EXPECT.b), "target position restored after reload")
+check(A.draft.frames.action1.rows == 2 and A.draft.frames.micro.scale == 110, "settings restored")
+check(not A.dirty, "not dirty after reload")
+-- Reset To Default returns to the preset spot, and Classic to the true native spot
+A:LoadPreset("Classic")
+local p2, rel2, rp2, x2, y2 = TargetFrame:GetPoint(1)
+check(p2 == "TOPLEFT" and near(x2, 250) and near(y2, -4), "native position is still the Blizzard default after reload")

@@ -1,0 +1,12 @@
+# build and test output
+dist/
+.test-tmp/
+# local interpreter builds
+tools/lua
+tools/lua.c
+# never commit game or account files
+WTF/
+SavedVariables/
+*.bak
+.DS_Store
+Thumbs.db

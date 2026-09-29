@@ -1,0 +1,41 @@
+BlizzUI Reborn
+Copyright (c) 2026 McDaddyYuki. All rights reserved.
+
+BlizzUI Reborn is NOT open-source software. The source code is published so
+that people can read it, report problems and propose changes. No licence to
+copy, modify or redistribute it is granted except as stated below.
+
+1. Using the addon
+   You may download official releases (the ZIP files attached to this
+   repository's GitHub Releases) and install and use them, unmodified, for
+   your own personal, non-commercial play.
+
+2. Viewing and proposing changes
+   You may view the source code on GitHub. GitHub's Terms of Service also let
+   GitHub users fork a public repository on GitHub. Forks may be used only to
+   prepare pull requests to this repository. They may not be used to publish,
+   distribute or maintain a separate version.
+
+3. Not permitted without prior written permission from the copyright holder
+   - redistributing the addon or any part of it, modified or unmodified
+     (including re-uploading releases to other sites);
+   - publishing or distributing modified versions;
+   - reusing any part of the code, documentation or tests in other projects;
+   - any commercial use.
+
+4. Contributions
+   Contributions are accepted under the terms in CONTRIBUTING.md
+   ("Contribution terms"). By opening a pull request you agree to those terms.
+
+5. Trademarks and third parties
+   World of Warcraft, Blizzard and related names are trademarks of Blizzard
+   Entertainment, Inc. This project is not affiliated with or endorsed by
+   Blizzard Entertainment, Warmane, Deadly Boss Mods, BigWigs, Carbonite,
+   Bagnon or any other addon or server. Third-party interfaces the addon uses
+   at runtime, and the history of material removed from earlier releases, are
+   described in PROVENANCE.md.
+
+6. No warranty
+   THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+   IMPLIED. IN NO EVENT SHALL THE COPYRIGHT HOLDER BE LIABLE FOR ANY CLAIM,
+   DAMAGES OR OTHER LIABILITY ARISING FROM THE SOFTWARE OR ITS USE.

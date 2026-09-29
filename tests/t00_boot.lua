@@ -1,0 +1,5 @@
+H.login()
+check(A.ready, "addon initialized")
+check(A.char.active.name == "Modern" and A.char.active.scope == "preset", "new character starts on Modern preset")
+check(A.menuButton and A.menuButton:GetText() == "Edit Mode", "Edit Mode entry in game menu")
+check(A.elements.action1.applied, "action bar 1 applied")

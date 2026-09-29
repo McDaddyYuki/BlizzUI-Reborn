@@ -1,0 +1,1 @@
+print("Interpreter: " .. _VERSION)
