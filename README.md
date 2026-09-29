@@ -8,7 +8,7 @@ An addon for World of Warcraft: Wrath of the Lich King 3.3.5a, bringing Retail (
 
 - **Client:** developed for Wrath of the Lich King 3.3.5a (build 12340), interface 30300. Written against that client's API only; Retail-only APIs are not used.
 - **Encounter compatibility:** boss timings are learned from your encounters instead of shipped as fixed schedules. This also accommodates custom encounter behavior, including on Whitemane's Frostmourne realm.
-- **Optional addons it works alongside:** Carbonite, Bagnon, Deadly Boss Mods (3.3.5 backports with callbacks), BigWigs (3.3.5), Questie, LibDataBroker launchers. None of them is required.
+- **Optional addons it works alongside:** Carbonite, Bagnon, Deadly Boss Mods (3.3.5 backports with callbacks), BigWigs (3.3.5), LibDataBroker launchers. None of them is required.
 
 ## Install
 
@@ -102,13 +102,6 @@ Editable: Boss Timeline, Boss Warnings, Player, Target, Focus, Pet, Target of Ta
 
 Carbonite keeps full ownership of its map and the native minimap. The Minimap element is disabled while Carbonite is loaded. Native status icons (calendar, mail, LFG, tracking...) are arranged in a column beside Carbonite's map window, with the clock and Addon Compartment under it, and taken out of Carbonite's dock. Minimap pins from other addons are kept out of the dock. `/br restore` gives them back.
 
-## Testing
-
-**Automated (headless simulation, run for this release):**
-- 34 scenario test files with 881 checks, all passing.
-- They run against a from-scratch simulation of the 3.3.5 API and default UI. On GitHub, every pull request and release runs them under **Lua 5.1** (the game's version), after compiling every addon file with the Lua 5.1 compiler and a lint that rejects Retail-only APIs.
-- The 0.7.0 results above were produced before the repository existed, under Lua 5.4 with 5.1 behaviour enforced by the test harness; the first CI run will be the first full run under Lua 5.1.
-
 **Boss Timeline scenarios covered:**
 - no boss mod with empty knowledge, and with validated knowledge after a reload and on another character;
 - DBM only, BigWigs only, and both at once (one entry per cast, cancellation, pause/resume, variable timers, stages);
@@ -125,8 +118,6 @@ Carbonite keeps full ownership of its map and the native minimap. The Minimap el
 - stance, presence and seal changes; vehicle; disable and re-enable.
 
 **Existing UI:** all earlier suites still pass: layouts, Edit Mode, action bars, Carbonite, compartment, keybinds, performance.
-
-**Not verified in the game client.** None of this release has been run in WoW 3.3.5a. Rendering, taint and compatibility with actual 3.3.5 versions of DBM and BigWigs can only be confirmed in game. Please check:
 
 1. The stance badge is a full circle to the right of the level, with the icon fully visible:
    - on a warrior (switch stances), a death knight (switch presences) and a paladin (apply a seal and let it expire);
