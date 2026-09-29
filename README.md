@@ -1,6 +1,6 @@
 # BlizzUI Reborn
 
-[![CI](https://github.com/McDaddyYuki/BlizzUIReborn/actions/workflows/ci.yml/badge.svg)](https://github.com/McDaddyYuki/BlizzUIReborn/actions/workflows/ci.yml)
+[![CI](https://github.com/McDaddyYuki/BlizzUI-Reborn/actions/workflows/ci.yml/badge.svg)](https://github.com/McDaddyYuki/BlizzUI-Reborn/actions/workflows/ci.yml)
 
 Retail (The War Within / Midnight) style HUD Edit Mode, layouts and Boss Timeline for the World of Warcraft 3.3.5a client, using the game's own frames and art.
 
@@ -12,7 +12,7 @@ Retail (The War Within / Midnight) style HUD Edit Mode, layouts and Boss Timelin
 
 ## Install
 
-1. Download **`BlizzUIReborn-<version>.zip`** from the [Releases page](https://github.com/McDaddyYuki/BlizzUIReborn/releases/latest). Don't use GitHub's green *Code → Download ZIP* button: that is the development source, and its folder name is wrong for the game.
+1. Download **`BlizzUIReborn-<version>.zip`** from the [Releases page](https://github.com/McDaddyYuki/BlizzUI-Reborn/releases/latest). Don't use GitHub's green *Code → Download ZIP* button: that is the development source, and its folder name is wrong for the game.
 2. Exit the game.
 3. **Delete any old `Interface\AddOns\BlizzUIReborn` folder completely**, so no old files stay behind.
 4. Extract the ZIP and copy the `BlizzUIReborn` folder from it into `Interface\AddOns\`. The path should be `Interface\AddOns\BlizzUIReborn\BlizzUIReborn.toc`.
@@ -147,7 +147,7 @@ Retail systems with no 3.3.5 equivalent are not faked: Action Bars 6–8 (no fre
 
 ## Reporting bugs and contributing
 
-- Bugs and ideas: [Issues](https://github.com/McDaddyYuki/BlizzUIReborn/issues/new/choose) (please include `/br report`).
+- Bugs and ideas: [Issues](https://github.com/McDaddyYuki/BlizzUI-Reborn/issues/new/choose) (please include `/br report`).
 - Code changes: see [CONTRIBUTING.md](CONTRIBUTING.md). Pull requests are proposals; the maintainer decides what is merged and released.
 - Security problems: [SECURITY.md](SECURITY.md) (private report).
 

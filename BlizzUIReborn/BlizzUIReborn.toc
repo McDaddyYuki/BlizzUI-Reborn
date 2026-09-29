@@ -4,7 +4,7 @@
 ## Author: McDaddyYuki
 ## Version: 0.7.0
 ## X-License: All rights reserved (see LICENSE.txt)
-## X-Website: https://github.com/McDaddyYuki/BlizzUIReborn
+## X-Website: https://github.com/McDaddyYuki/BlizzUI-Reborn
 ## SavedVariables: BlizzUIRebornDB
 ## SavedVariablesPerCharacter: BlizzUIRebornCharDB
 ## OptionalDeps: Carbonite, LibDataBroker-1.1, LibDBIcon-1.0, WeakAuras, AtlasLoot, Bagnon, HealBot, DBM-Core, BigWigs, RestoCompare
