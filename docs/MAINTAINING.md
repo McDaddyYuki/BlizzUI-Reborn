@@ -25,7 +25,7 @@ The approval number is 0 on purpose. Branch protection can't require a second pe
 
 1. Install the GitHub CLI and log in as McDaddyYuki: `gh auth login`.
 2. Create the empty public repository: `scripts/github/configure-github.sh create`.
-3. Push the prepared history: `git remote add origin https://github.com/McDaddyYuki/BlizzUIReborn.git && git push -u origin main`.
+3. Push the prepared history: `git remote add origin https://github.com/McDaddyYuki/BlizzUI-Reborn.git && git push -u origin main`.
 4. Apply the settings: `scripts/github/configure-github.sh settings`, then check them with `... show`.
 5. Wait for the first CI run on `main` (Actions tab) to pass.
 6. Release 0.7.0 as described below.

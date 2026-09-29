@@ -1,8 +1,8 @@
 blank_issues_enabled: false
 contact_links:
   - name: Report a security problem privately
-    url: https://github.com/McDaddyYuki/BlizzUIReborn/security/advisories/new
+    url: https://github.com/McDaddyYuki/BlizzUI-Reborn/security/advisories/new
     about: Problems with the Import or boss data strings, or anything that could harm a player. Please don't open a public issue.
   - name: Installation help
-    url: https://github.com/McDaddyYuki/BlizzUIReborn#install
+    url: https://github.com/McDaddyYuki/BlizzUI-Reborn#install
     about: Check the install steps first (the release ZIP already contains the BlizzUIReborn folder).

@@ -11,7 +11,7 @@
 # Safe to run again: every step sets the same values.
 set -euo pipefail
 OWNER="${OWNER:-McDaddyYuki}"
-NAME="${NAME:-BlizzUIReborn}"
+NAME="${NAME:-BlizzUI-Reborn}"
 REPO="$OWNER/$NAME"
 HERE="$(cd "$(dirname "$0")" && pwd)"
 
