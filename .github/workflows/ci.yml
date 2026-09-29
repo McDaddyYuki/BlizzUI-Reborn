@@ -64,7 +64,7 @@ jobs:
         run: python3 scripts/check_package.py "dist/BlizzUIReborn-${{ steps.build.outputs.version }}.zip" "${{ steps.build.outputs.version }}"
       - name: Check the changelog has this version
         run: python3 scripts/release_notes.py "${{ steps.build.outputs.version }}" > /dev/null
-      - uses: actions/upload-artifact@v4
+      - uses: actions/upload-artifact@v7
         with:
           name: BlizzUIReborn-${{ steps.build.outputs.version }}-preview
           path: dist/*.zip
