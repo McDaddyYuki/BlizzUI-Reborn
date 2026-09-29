@@ -2,13 +2,13 @@
 
 [![CI](https://github.com/McDaddyYuki/BlizzUI-Reborn/actions/workflows/ci.yml/badge.svg)](https://github.com/McDaddyYuki/BlizzUI-Reborn/actions/workflows/ci.yml)
 
-Retail (The War Within / Midnight) style HUD Edit Mode, layouts and Boss Timeline for the World of Warcraft 3.3.5a client, using the game's own frames and art.
+An addon for World of Warcraft: Wrath of the Lich King 3.3.5a, bringing Retail (The War Within / Midnight) style HUD Edit Mode, layouts and a Boss Timeline to the client using the game's own frames and art.
 
-## Supported client and server
+## Client and compatibility
 
-- **Client:** 3.3.5a (build 12340), interface 30300. Written against that client's API only; Retail-only APIs are not used.
-- **Server:** developed for Warmane (Frostmourne). Other 3.3.5a servers should work, but custom encounter scripts differ between servers. That is why boss timings are learned on your own server instead of shipped.
-- **Optional addons it works alongside:** Carbonite, Bagnon, Deadly Boss Mods (3.3.5 backports with callbacks, such as DBM-Warmane), BigWigs (3.3.5), Questie, LibDataBroker launchers. None of them is required.
+- **Client:** developed for Wrath of the Lich King 3.3.5a (build 12340), interface 30300. Written against that client's API only; Retail-only APIs are not used.
+- **Encounter compatibility:** boss timings are learned from your encounters instead of shipped as fixed schedules. This also accommodates custom encounter behavior, including on Whitemane's Frostmourne realm.
+- **Optional addons it works alongside:** Carbonite, Bagnon, Deadly Boss Mods (3.3.5 backports with callbacks), BigWigs (3.3.5), Questie, LibDataBroker launchers. None of them is required.
 
 ## Install
 
@@ -30,7 +30,7 @@ Retail's Boss Abilities timeline: what the boss you're fighting will do next, an
 - Boss frames (`boss1`–`boss4`) and the game's world-boss classification.
 - The active encounter module of Deadly Boss Mods (never a trash module).
 - Creatures you confirm. When an elite with no boss flag (skull level, or 2+ levels above you, in a dungeon or raid) is your target in combat, a small question asks once whether it is a boss. You can also use `/br timeline boss`.
-- Your answer is remembered for that server and instance. It can be undone with `/br timeline notboss` or **Not a Boss…** in Encounter Details. "Not a boss" always wins.
+- Your answer is remembered for that encounter. It can be undone with `/br timeline notboss` or **Not a Boss…** in Encounter Details. "Not a boss" always wins.
 - A BigWigs engage message is not enough on its own, because some BigWigs modules cover trash. Its bars are used once one of its creatures is a boss by one of the rules above.
 - **Limits:** a dungeon boss with no boss flag isn't recognised until you confirm it once, so the first pull may be missed. Adds stay separate from bosses unless a boss frame, DBM's encounter module or you say otherwise.
 
@@ -41,7 +41,7 @@ Retail's Boss Abilities timeline: what the boss you're fighting will do next, an
    - Nothing of theirs is stored.
    - When both time the same ability, one entry is shown: DBM's, or BigWigs' if you prefer it in the options.
    - A cancelled boss mod timer never brings back an older local estimate. A newly observed cast can.
-2. **What your account has learned on this server,** once it has been validated (see below). If a learned timing keeps proving more accurate than the boss mod's (for example the boss mod says 30s and your server does 24s), the learned one is shown instead. The boss mod's timing is still used for comparison only.
+2. **What your account has learned from your encounters,** once it has been validated (see below). If a learned timing keeps proving more accurate than the boss mod's (for example the boss mod says 30s but the ability consistently occurs every 24s), the learned one is shown instead. The boss mod's timing is still used for comparison only.
 3. **Health triggers.** A mechanic learned to happen at a boss health percentage gets a live estimate from that boss's own health loss.
 4. **Casts in progress,** from the boss's cast bar or the combat log.
 
@@ -67,7 +67,7 @@ Retail's Boss Abilities timeline: what the boss you're fighting will do next, an
 - **Where it is kept:** account-wide means every character of this account on this computer, in the saved variables (`BlizzUIRebornDB`), kept separate from layouts. It does not sync between computers. The game saves it at logout or `/reload`.
 - **Your controls:**
   - Right-click an ability or open **Encounter Details** (`/br timeline details`) to hide it, pin it, set a repeat time or HP threshold by hand, lock it, go back to the previous timing, always use the boss mod's timing, or forget it.
-  - **Server Changed…** re-checks everything after a server patch.
+  - **Server Changed…** re-checks learned timings when encounter behavior changes.
   - **Share Boss Data / Import** exchanges validated timings as a plain data string. Imported timings must validate on your own fights before they're used.
 
 **Options** (Interface → AddOns → BlizzUI Reborn) include:
@@ -96,7 +96,7 @@ Editable: Boss Timeline, Boss Warnings, Player, Target, Focus, Pet, Target of Ta
 
 ## Commands
 
-`/br` Edit Mode · `/br keybind` Quick Keybind · `/br timeline test` practice Boss Timeline · `/br timeline details` Encounter Details · `/br timeline boss` / `/br timeline notboss` mark your target as a boss or not (this server and instance) · `/br timeline reset` forget learned timings · `/br options` settings · `/br restore` put the original UI back and pause the addon · `/br enable` resume · `/br report` copyable diagnostics (include this with bug reports) · `/br resetwindows` reset Edit Mode window positions
+`/br` Edit Mode · `/br keybind` Quick Keybind · `/br timeline test` practice Boss Timeline · `/br timeline details` Encounter Details · `/br timeline boss` / `/br timeline notboss` mark your target as a boss or not · `/br timeline reset` forget learned timings · `/br options` settings · `/br restore` put the original UI back and pause the addon · `/br enable` resume · `/br report` copyable diagnostics (include this with bug reports) · `/br resetwindows` reset Edit Mode window positions
 
 ## Carbonite
 
@@ -112,7 +112,7 @@ Carbonite keeps full ownership of its map and the native minimap. The Minimap el
 **Boss Timeline scenarios covered:**
 - no boss mod with empty knowledge, and with validated knowledge after a reload and on another character;
 - DBM only, BigWigs only, and both at once (one entry per cast, cancellation, pause/resume, variable timers, stages);
-- a server timing that differs from the boss mod's;
+- an observed ability timing that differs from the boss mod's;
 - random, windowed and health-triggered mechanics;
 - interrupts, skipped casts, wipes, late joins and phase changes;
 - boss confirmation and "not a boss";
@@ -126,7 +126,7 @@ Carbonite keeps full ownership of its map and the native minimap. The Minimap el
 
 **Existing UI:** all earlier suites still pass: layouts, Edit Mode, action bars, Carbonite, compartment, keybinds, performance.
 
-**Not verified in the game client.** None of this release has been run in WoW 3.3.5a. Rendering, taint and the real DBM-Warmane and BigWigs builds can only be confirmed in game. Please check:
+**Not verified in the game client.** None of this release has been run in WoW 3.3.5a. Rendering, taint and compatibility with actual 3.3.5 versions of DBM and BigWigs can only be confirmed in game. Please check:
 
 1. The stance badge is a full circle to the right of the level, with the icon fully visible:
    - on a warrior (switch stances), a death knight (switch presences) and a paladin (apply a seal and let it expire);
